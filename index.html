@@ -73,8 +73,6 @@
       </div>
     </section>
 
-    <div class="section-space"><img src="img/moon.png" alt="" aria-hidden="true"></div>
-
     <!-- ===== 応募期間 ===== -->
     <section class="section section-entry" id="a-entry">
       <div class="container">
@@ -96,11 +94,15 @@
           <div class="section-heading-logo">THEME</div>
           <h2 class="section-title">「地球」と「ヒト」をかけ合わせて、これからの暮らしをデザインしよう。</h2>
         </div>
-        <!-- <div class="section-body">
-          <h3 class="section-subtitle">PRIZE</h3>
-          <h4 class="section-subtitle-ja">賞金</h4>
-          <p></p>
-        </div> -->
+        <div class="section-body">
+          <p>
+            <span>地球・宇宙空間・月</span>という「場所」に、暮らし・文化・娯楽の「コト」をかけ合わせ、
+            未来の“当たり前”になるアイデアを提案してください。<br>
+            民間人も宇宙に行く時代が到来している今、宇宙は特別な場所ではなくなってきています。<br>
+            あなたの得意と宇宙を掛け合わせて、<span>「行ってみたくなる」「暮らしたくなる」宇宙</span>を。
+            そして「住み続けたくなる」「もっと大切にしたくなる」地球を、デザインしよう。
+          </p>
+        </div>
       </div>
     </section>
 
@@ -179,7 +181,7 @@
           <div class="flow-timeline-step"><div class="flow-step-label">STEP2</div></div>
           <div class="flow-timeline-step"><div class="flow-step-label">STEP3</div></div>
         </div>
-        <ol class="flow-steps">
+        <ol class="flow-steps flow-steps--deal">
           <li class="flow-step">
             <div class="flow-step-label flow-step-label--card">STEP1</div>
             <div class="flow-step-head">
@@ -309,46 +311,97 @@
       </div>
     </div>
   </footer>
-  
-  <!-- 固定アンカーショートカット（練習用） -->
-  <div class="anchor-shortcuts">
-    <a href="#a-themes">THEMES</a>
-    <a href="#a-reward">PRIZE</a>
-    <a href="#a-schedule">SCHEDULE</a>
-    <a href="#a-outline">OUTLINE</a>
-    <a href="#a-criteria">CRITERIA</a>
-  </div>
+
+  <a href="#a-entry" class="btn btn-primary entry-fab" aria-label="応募セクションへ移動">ENTRY</a>
 
   <script>
     (() => {
+      document.documentElement.classList.add('js');
+
       const toggle = document.querySelector('.nav-toggle');
       const nav = document.getElementById('mobile-nav');
       const backdrop = document.querySelector('.mobile-nav-backdrop');
-      if (!toggle || !nav || !backdrop) return;
 
-      const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+      if (toggle && nav && backdrop) {
+        const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
 
-      const setOpen = (open) => {
-        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        nav.hidden = !open;
-        backdrop.hidden = !open;
-        document.body.classList.toggle('is-mobile-nav-open', open);
-      };
+        const setOpen = (open) => {
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          nav.hidden = !open;
+          backdrop.hidden = !open;
+          document.body.classList.toggle('is-mobile-nav-open', open);
+        };
 
-      toggle.addEventListener('click', () => setOpen(!isOpen()));
+        toggle.addEventListener('click', () => setOpen(!isOpen()));
 
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
-      });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') setOpen(false);
+        });
 
-      document.addEventListener('click', (e) => {
-        if (!isOpen()) return;
-        const target = e.target;
-        if (!(target instanceof Element)) return;
-        if (target.closest('[data-mobile-nav-close]')) setOpen(false);
-      });
+        document.addEventListener('click', (e) => {
+          if (!isOpen()) return;
+          const target = e.target;
+          if (!(target instanceof Element)) return;
+          if (target.closest('[data-mobile-nav-close]')) setOpen(false);
+        });
 
-      setOpen(false);
+        setOpen(false);
+      }
+
+      // SCHEDULE：カードが配られるように表示
+      const schedule = document.querySelector('.section-schedule');
+      if (schedule) {
+        const stepsList = schedule.querySelector('.flow-steps--deal');
+        if (stepsList) {
+          const firstCard = stepsList.querySelector('.flow-step');
+          const run = () => stepsList.classList.add('is-deal');
+
+          if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver(
+              (entries) => {
+                for (const entry of entries) {
+                  if (!entry.isIntersecting) continue;
+                  run();
+                  io.disconnect();
+                  break;
+                }
+              },
+              { threshold: 0.4, rootMargin: '0px 0px -12% 0px' }
+            );
+
+            if (firstCard) {
+              io.observe(firstCard);
+            } else {
+              io.observe(stepsList);
+            }
+          } else {
+            run();
+          }
+        }
+      }
+
+      // セクション：スクロール到達でフェードイン（透過 + ぼかし）
+      const sections = document.querySelectorAll('main .section');
+      if (sections.length) {
+        const reveal = (el) => el.classList.add('is-revealed');
+
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                reveal(entry.target);
+                io.unobserve(entry.target);
+              }
+            },
+            { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+          );
+
+          sections.forEach((el) => io.observe(el));
+        } else {
+          sections.forEach(reveal);
+        }
+      }
     })();
   </script>
 </body>

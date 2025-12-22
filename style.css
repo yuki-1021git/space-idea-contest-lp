@@ -49,9 +49,36 @@ body.is-mobile-nav-open {
 }
 
 .section {
-  padding: 4.5rem 0;
+  padding: clamp(5rem, 5vw + 3rem, 7rem) 0;
   background-color: var(--color-bg-section);
   border-top: 1px solid var(--color-border-soft);
+}
+
+/* ===== セクション：スクロール到達でフェードイン（透過 + ぼかし） ===== */
+html.js .section {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(10px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 700ms ease;
+  will-change: opacity, transform, filter;
+}
+
+html.js .section.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .section {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
 }
 
 .section:nth-of-type(even) {
@@ -73,7 +100,50 @@ body.is-mobile-nav-open {
   left: 0;
   bottom: 0;
   width: 100%;
-  border-bottom: 2px solid var(--color-accent);
+  height: 2px;
+  background-color: var(--color-accent);
+  background-repeat: no-repeat;
+  background-size: 35% 100%;
+  background-position: 120% 0;
+  animation: section-title-underline-sweep 2.2s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes section-title-underline-sweep {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-title::after {
+    animation: none;
+  }
+}
+
+@supports (color: color-mix(in srgb, white, black)) {
+  .section-title::after {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-text) 70%, transparent),
+      transparent
+    );
+  }
+}
+
+@supports not (color: color-mix(in srgb, white, black)) {
+  .section-title::after {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.7),
+      transparent
+    );
+  }
 }
 
 @supports (color: color-mix(in srgb, white, rgb(250, 255, 186))) {
@@ -98,17 +168,6 @@ body.is-mobile-nav-open {
   text-align: center;
 }
 
-.section-space {
-  /* max-width: 1080px; */
-  text-align: center;
-  background: #172b59;
-}
-
-.section-space img {
-  width: 25%;
-  margin: auto;
-  justify-content: center;
-}
 
 /* ===== ヘッダー ===== */
 
@@ -125,7 +184,7 @@ body.is-mobile-nav-open {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0;
+  padding: 0.75rem;
 }
 
 .site-logo img {
@@ -165,6 +224,7 @@ body.is-mobile-nav-open {
   background: rgba(5, 8, 22, 0.6);
   color: var(--color-text);
   letter-spacing: 0.08em;
+  cursor: pointer;
 }
 
 .nav-toggle:focus-visible {
@@ -379,7 +439,7 @@ body.is-mobile-nav-open {
   margin: 0 auto;
 }
 
-.section-body span {
+.section-body p span {
   font-weight: 700;
   color: var(--color-accent);
 }
@@ -450,7 +510,7 @@ body.is-mobile-nav-open {
 
 .prize-name {
   margin: 0 auto;
-  font-size: 2.7rem;
+  font-size: clamp(1.25rem, 1.2vw + 1rem, 1.5rem);
 }
 
 .prize-amount {
@@ -460,6 +520,7 @@ body.is-mobile-nav-open {
   color: var(--color-accent);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+  font-size: clamp(2.4rem, 3vw + 1.5rem, 5.4rem);
 }
 
 .prize-amount::after {
@@ -511,12 +572,14 @@ body.is-mobile-nav-open {
 /* ===== フロー ===== */
 
 .flow-steps {
+  --flow-gap: 2rem;
+  --flow-gap-2: 4rem;
   list-style: none;
   margin: 32px 0 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
+  gap: var(--flow-gap);
 }
 
 .flow-timeline {
@@ -555,6 +618,78 @@ body.is-mobile-nav-open {
   background: transparent;
   display: flex;
   flex-direction: column;
+}
+
+/* ===== SCHEDULE：カードが配られるように表示 ===== */
+html.js .section-schedule .flow-steps--deal {
+  overflow: visible;
+}
+
+html.js .section-schedule .flow-steps--deal .flow-step {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  --deal-from: translateY(10px);
+  transform: var(--deal-from);
+  will-change: transform;
+}
+
+@media (min-width: 881px) {
+  /* 1枚目を最前面、2枚目を背面、3枚目を最背面に重ねる */
+  html.js .section-schedule .flow-steps--deal .flow-step:nth-child(1) {
+    z-index: 3;
+    --deal-from: translateY(8px);
+  }
+
+  html.js .section-schedule .flow-steps--deal .flow-step:nth-child(2) {
+    z-index: 2;
+    --deal-from: translateX(calc(-100% - var(--flow-gap))) translateY(18px) scale(0.99);
+  }
+
+  html.js .section-schedule .flow-steps--deal .flow-step:nth-child(3) {
+    z-index: 1;
+    --deal-from: translateX(calc(-200% - var(--flow-gap-2))) translateY(28px) scale(0.98);
+  }
+}
+
+@media (max-width: 880px) {
+  /* SPは1カラムなので、重ねずに軽い立ち上がりだけ */
+  html.js .section-schedule .flow-steps--deal .flow-step {
+    --deal-from: translateY(14px);
+  }
+}
+
+html.js .section-schedule .flow-steps--deal.is-deal .flow-step {
+  animation: flow-step-deal-out 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html.js .section-schedule .flow-steps--deal.is-deal .flow-step:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+html.js .section-schedule .flow-steps--deal.is-deal .flow-step:nth-child(2) {
+  animation-delay: 160ms;
+}
+
+html.js .section-schedule .flow-steps--deal.is-deal .flow-step:nth-child(3) {
+  animation-delay: 320ms;
+}
+
+@keyframes flow-step-deal-out {
+  0% {
+    transform: var(--deal-from);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .section-schedule .flow-steps--deal .flow-step {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
 }
 
 .flow-step-head {
@@ -701,6 +836,13 @@ body.is-mobile-nav-open {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    filter 150ms ease;
 }
 
 .btn:focus-visible {
@@ -722,6 +864,40 @@ body.is-mobile-nav-open {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    filter 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover,
+  .hero-btn:hover,
+  .outline-link a:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:hover {
+    background: var(--color-accent);
+    color: #1a1525;
+    border-color: var(--color-bg);
+    border-width: 2px;
+  }
+
+  .btn-primary:hover,
+  .btn--hero-primary:hover {
+    filter: brightness(1.05);
+    border-color: var(--color-text);
+  }
+}
+
+.btn:active,
+.hero-btn:active,
+.outline-link a:active {
+  transform: translateY(0);
 }
 
 .hero-btn:focus-visible {
@@ -732,6 +908,8 @@ body.is-mobile-nav-open {
 .btn-primary {
   background: var(--color-accent);
   color: #1a1525;
+  border-color: var(--color-bg);
+  border-width: 2px;
   font-size: clamp(1rem, 1vw + 0.9rem, 1.4rem);
   font-weight: 600;
 }
@@ -739,6 +917,29 @@ body.is-mobile-nav-open {
 .btn--hero-primary {
   background: var(--color-accent);
   color: #1a1525;
+  border-color: var(--color-bg);
+  border-width: 2px;
+}
+
+/* ===== 右下固定ENTRY（真円） ===== */
+.entry-fab {
+  --entry-fab-size: clamp(4.5rem, 2vw + 4.25rem, 5.625rem);
+
+  position: fixed;
+  right: calc(20px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  width: var(--entry-fab-size);
+  height: var(--entry-fab-size);
+  padding: 0;
+  z-index: 60;
+  border-radius: 999px;
+  font-size: clamp(1.05rem, 0.4vw + 1rem, 1.2rem);
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+.entry-fab:hover {
+  border-color: var(--color-text);
 }
 
 /* ===== フッター ===== */
@@ -804,6 +1005,12 @@ body.is-mobile-nav-open {
 }
 
 /* ===== レスポンシブ ===== */
+
+@media (max-width: 1080px) {
+  .hero-main {
+    left: 5%;
+  }
+}
 
 @media (max-width: 880px) {
   :root {
@@ -908,42 +1115,3 @@ body.is-mobile-nav-open {
   }
 }
 
-@media (max-width: 880px) {
-  /* SPでは右下ショートカットは非表示 */
-  .anchor-shortcuts {
-    display: none;
-  }
-}
-
-/* ===== 固定アンカーショートカット ===== */
-.anchor-shortcuts {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 60;
-}
-
-.anchor-shortcuts a {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(5, 8, 22, 0.85);
-  border: 1px solid var(--color-border-soft);
-  color: var(--color-text-muted);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-}
-
-.anchor-shortcuts a:focus-visible {
-  outline: 2px solid var(--color-text-muted);
-  outline-offset: 3px;
-}
-
-.anchor-shortcuts a:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-}
