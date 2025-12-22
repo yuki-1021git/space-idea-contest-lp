@@ -1,0 +1,29 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+
+# Logs
+*.log
+
+# Packages
+node_modules/
+
+# Design sources (keep local only)
+*.ai
+*.psd
+*.psb
+
+# Large source images not used in final build
+img/AdobeStock_*.jpeg
+img/夜空.jpeg
+
+# Build outputs
+/dist/
+/build/
+
+# Misc
+*.tmp

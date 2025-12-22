@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPACE IDEA CONTEST｜宇宙×デザイン アイデアコンテスト</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ===== ヘッダー／グローバルナビ ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="site-logo"><img src="img/logo.png" alt="SPACE IDEA CONTEST"></div>
+      <nav class="site-nav">
+        <a href="#a-themes">THEMES</a>
+        <a href="#a-reward">PRIZE</a>
+        <a href="#a-schedule">SCHEDULE</a>
+        <a href="#a-outline">OUTLINE</a>
+        <a href="#a-criteria">CRITERIA</a>
+      </nav>
+
+      <!-- SP用ハンバーガー（880px以下で表示） -->
+      <button class="nav-toggle" type="button" aria-controls="mobile-nav" aria-expanded="false">
+        <span class="nav-toggle-lines" aria-hidden="true"></span>
+        <span class="nav-toggle-text">MENU</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SP用メニュー（880px以下で有効） -->
+  <div class="mobile-nav-backdrop" data-mobile-nav-close hidden></div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルメニュー" hidden>
+    <div class="mobile-nav-inner">
+      <a href="#a-themes" data-mobile-nav-close>THEMES</a>
+      <a href="#a-reward" data-mobile-nav-close>PRIZE</a>
+      <a href="#a-schedule" data-mobile-nav-close>SCHEDULE</a>
+      <a href="#a-outline" data-mobile-nav-close>OUTLINE</a>
+      <a href="#a-criteria" data-mobile-nav-close>CRITERIA</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ===== ヒーローエリア ===== -->
+    <section class="hero" id="top">
+      <div class="hero-img-container">
+        <img class="hero-img" src="img/hero-img.png" alt="" aria-hidden="true">
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-main">
+          <p class="hero-copy-main">美しい地球を<br>デザインしよう</p>
+          <div class="hero-day-img"><img src="img/day.png" alt="" aria-hidden="true"></div>
+          <a href="#a-entry" class="hero-btn btn--hero-primary">ENTRY</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== コンテスト概要 ===== -->
+    <section class="section section-intro" id="a-intro">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo"><img src="img/logo.png" alt="" aria-hidden="true"></div>
+          <h2 class="section-title">その景色、10年後も見たいから</h2>
+        </div>
+        <div class="section-body">
+          <p>SPACE IDEA CONTESTは、
+            <span>得意なこと × 宇宙</span>で未来をつくるアイデアコンテスト。<br>
+            宇宙は「開発」から「利用」へ。<br>
+            誰でも、宇宙に関わっていい時代になってきた。<br>
+            全国の大学生・大学院生なら、学部関係なく参加OK。<br>
+            「行ってみたい宇宙」と「大切にしたい地球」を、<br>
+            あなたのアイデアでデザインしよう。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-space"><img src="img/moon.png" alt="" aria-hidden="true"></div>
+
+    <!-- ===== 応募期間 ===== -->
+    <section class="section section-entry" id="a-entry">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">ENTRY</div>
+          <h2 class="section-title">あなたのアイデアでデザインしよう。</h2>
+        </div>
+         <div class="section-body section-body--center">
+        <!--  <p class="entry-period">ここにテキストが入ります</p> -->
+          <span class="btn btn-primary" aria-label="応募締切">～2026/1/11</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== テーマ ===== -->
+    <section class="section section-theme" id="a-themes">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">THEME</div>
+          <h2 class="section-title">「地球」と「ヒト」をかけ合わせて、これからの暮らしをデザインしよう。</h2>
+        </div>
+        <!-- <div class="section-body">
+          <h3 class="section-subtitle">PRIZE</h3>
+          <h4 class="section-subtitle-ja">賞金</h4>
+          <p></p>
+        </div> -->
+      </div>
+    </section>
+
+    <!-- ===== 賞と賞金 ===== -->
+    <section class="section section-prize" id="a-reward">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">PRIZE</div>
+          <h2 class="section-title">賞金</h2>
+        </div>
+        <div class="section-body">
+          <div class="prize-list">
+            <article class="prize-card">
+              <h3 class="prize-name">最優秀賞</h3>
+              <p class="prize-amount">¥30,000</p>
+              <!-- <p class="prize-text">ここにテキストが入ります</p> -->
+            </article>
+            <article class="prize-card">
+              <h3 class="prize-name">優秀賞</h3>
+              <p class="prize-amount">¥20,000</p>
+              <!-- <p class="prize-text">ここにテキストが入ります</p> -->
+            </article>
+            <article class="prize-card">
+              <h3 class="prize-name">優良賞</h3>
+              <p class="prize-amount">¥10,000</p>
+              <!-- <p class="prize-text">ここにテキストが入ります</p> -->
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 審査員 ===== 
+    <section class="section section-judges" id="a-guest">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">JUDGES</div>
+          <h2 class="section-title">ここにタイトルが入ります</h2>
+        </div>
+        <div class="section-body judges-body">
+          <div class="judge-profile">
+            <div class="judge-photo">ここにテキストが入ります</div>
+            <div class="judge-text">
+              <p class="judge-role">ここにテキストが入ります</p>
+              <h3 class="judge-name">ここにタイトルが入ります</h3>
+              <p class="judge-bio">ここにテキストが入ります</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- ===== メッセージ ===== 
+    <section class="section section-message" id="a-message">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">MESSAGE</div>
+          <h2 class="section-title">ここにタイトルが入ります</h2>
+        </div>
+        <div class="section-body">
+          <p>ここにテキストが入ります</p>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- ===== 選考フロー（タイムライン） ===== -->
+    <section class="section section-schedule" id="a-schedule">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">SCHEDULE</div>
+          <h2 class="section-title">選考フロー</h2>
+        </div>
+
+        <div class="flow-timeline" aria-label="選考フローのステップ">
+          <div class="flow-timeline-step"><div class="flow-step-label">STEP1</div></div>
+          <div class="flow-timeline-step"><div class="flow-step-label">STEP2</div></div>
+          <div class="flow-timeline-step"><div class="flow-step-label">STEP3</div></div>
+        </div>
+        <ol class="flow-steps">
+          <li class="flow-step">
+            <div class="flow-step-label flow-step-label--card">STEP1</div>
+            <div class="flow-step-head">
+              <h3 class="flow-step-title">応募フォームの入力</h3>
+              <p class="flow-step-date">～2025/12/25</p>
+            </div>
+            <div class="flow-step-body">
+              <p class="flow-step-text">ENTRYボタンより必要事項を入力の上、ご応募ください。</p>
+              <p class="flow-step-text">ご登録いただいたメールアドレスに課題をお送りいたします。</p>
+              <p class="flow-step-text">応募事項をご確認の上、同意をお願いします。</p>
+            </div>
+          </li>
+          <li class="flow-step">
+            <div class="flow-step-label flow-step-label--card">STEP2</div>
+            <div class="flow-step-head">
+              <h3 class="flow-step-title">課題の提出</h3>
+              <p class="flow-step-date">～2025/12/25</p>
+            </div>
+            <div class="flow-step-body">
+              <p class="flow-step-text">課題の提出をもって応募完了です。</p>
+              <p class="flow-step-text">原則として応募期限後の応募は受付できません。</p>
+              <p class="flow-step-text">応募後の再提出は可能ですが、1人1作品までです。</p>
+            </div>
+
+          </li>
+          <li class="flow-step">
+            <div class="flow-step-label flow-step-label--card">STEP3</div>
+            <div class="flow-step-head">
+              <h3 class="flow-step-title">最終選考</h3>
+              <p class="flow-step-date">2025/12/26～2026/1/9</p>
+            </div>
+            <div class="flow-step-body">
+              <p class="flow-step-text">応募内容をもとに審査を行い、最終選考通過者にメールでご連絡します。</p>
+              <p class="flow-step-text">通過後の流れ（発表・手続きなど）は、案内メールにてご確認ください。</p>
+              <p class="flow-step-text">結果連絡までしばらくお待ちください。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== 応募要項 ===== -->
+    <section class="section section-outlines" id="a-outline">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">OUTLINES</div>
+          <h2 class="section-title">応募要項</h2>
+        </div>
+        <div class="section-body">
+          <div class="outline-list">
+            <div class="outline-item">
+              <h3 class="outline-title">応募期間</h3>
+              <p>2025/11/29～2025/12/25</p>
+            </div>
+            <div class="outline-item">
+              <h3 class="outline-title">応募資格</h3>
+              <p>全国の高校生及び大学生、大学院生までの個人</p>
+            </div>
+            <div class="outline-item">
+              <h3 class="outline-title">参加費</h3>
+              <p>無料でご参加いただけます。</p>
+            </div>
+          </div>
+          <div class="outline-link">
+            <a href="#a-outline">応募要件詳細はこちらから</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 評価基準 + 最後のCTA ===== -->
+    <section class="section section-criteria" id="a-criteria">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading-logo">CRITERIA</div>
+          <h2 class="section-title">選考基準</h2>
+        </div>
+        <div class="section-body section-body--center">
+          <p>
+            正解はひとつじゃない。<br>
+            その発想が、未来の「当たり前」になるかもしれない。<br>
+            伝わるか・おもしろいか・実現できるか――キミのアイデアで勝負しよう。
+          </p>
+
+          <div class="criteria-keywords" aria-label="評価キーワード">
+            <div class="criteria-keyword">ひらめき</div>
+            <div class="criteria-keyword">ワクワク</div>
+            <div class="criteria-keyword">伝わる</div>
+            <div class="criteria-keyword">実現性</div>
+          </div>
+
+          <a href="#a-entry" class="btn btn-primary">ENTRY</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== フッター ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-contact">
+        <img class="footer-logo" src="img/logo.png" alt="SPACE IDEA CONTEST">
+      </div>
+
+     <!-- <div class="footer-sponsors">
+        <div class="footer-sponsor-group">
+          <p class="footer-sponsor-label">ここにテキストが入ります</p>
+          <div class="footer-sponsor-logos">
+            <div class="footer-logo">ここにテキストが入ります</div>
+            <div class="footer-logo">ここにテキストが入ります</div>
+          </div>
+        </div>
+         <div class="footer-sponsor-group">
+          <p class="footer-sponsor-label">ここにテキストが入ります</p>
+          <div class="footer-sponsor-logos">
+            <div class="footer-logo">ここにテキストが入ります</div>
+            <div class="footer-logo">ここにテキストが入ります</div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="footer-bottom">
+        <div class="footer-credits">
+          <p>これは架空サイトです</p>
+        </div>
+        <p class="footer-copy">Copyright © john_design</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- 固定アンカーショートカット（練習用） -->
+  <div class="anchor-shortcuts">
+    <a href="#a-themes">THEMES</a>
+    <a href="#a-reward">PRIZE</a>
+    <a href="#a-schedule">SCHEDULE</a>
+    <a href="#a-outline">OUTLINE</a>
+    <a href="#a-criteria">CRITERIA</a>
+  </div>
+
+  <script>
+    (() => {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('mobile-nav');
+      const backdrop = document.querySelector('.mobile-nav-backdrop');
+      if (!toggle || !nav || !backdrop) return;
+
+      const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+      const setOpen = (open) => {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        nav.hidden = !open;
+        backdrop.hidden = !open;
+        document.body.classList.toggle('is-mobile-nav-open', open);
+      };
+
+      toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!isOpen()) return;
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        if (target.closest('[data-mobile-nav-close]')) setOpen(false);
+      });
+
+      setOpen(false);
+    })();
+  </script>
+</body>
+</html>
