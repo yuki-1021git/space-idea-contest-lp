@@ -323,10 +323,21 @@ html.js .section.is-revealed {
 .hero {
   position: relative;
   background: radial-gradient(circle at top, #172b59 0, #050816 55%);
+  /*
+    モバイルではアドレスバーの伸縮で 100dvh が変動し、
+    スクロール開始でヒーロー高さ(=画像サイズ)が変わることがあります。
+    ここでは高さを安定させるため、svh（小さいビューポート）を優先します。
+  */
   height: calc(100vh - var(--site-header-height));
-  height: calc(100svh - var(--site-header-height));
-  height: calc(100dvh - var(--site-header-height));
+  min-height: calc(100vh - var(--site-header-height));
   overflow: hidden;
+}
+
+@supports (height: 100svh) {
+  .hero {
+    height: calc(100svh - var(--site-header-height));
+    min-height: calc(100svh - var(--site-header-height));
+  }
 }
 
 .hero-inner {
@@ -971,6 +982,14 @@ html.js .section-schedule .flow-steps--deal.is-deal .flow-step:nth-child(3) {
   margin: 0 auto;
 }
 
+/* フッターのロゴ画像は縦横比を維持して表示 */
+.footer-contact img.footer-logo {
+  display: block;
+  width: 280px;
+  max-width: 70vw;
+  height: auto;
+}
+
 .footer-sponsor-label {
   margin: 0 0 8px;
   font-size: 12px;
@@ -983,7 +1002,7 @@ html.js .section-schedule .flow-steps--deal.is-deal .flow-step:nth-child(3) {
   gap: 8px;
 }
 
-.footer-logo {
+.footer-sponsor-logos .footer-logo {
   min-width: 80px;
   width: 35%;
   min-height: 32px;
